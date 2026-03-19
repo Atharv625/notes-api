@@ -23,7 +23,9 @@ app.use(express.json());
 // routes
 app.use("/api/notes", require("./routes/noteRoutes"));
 app.use("/api/auth", require("./routes/authRoutes"));
-
+app.get("/", (req, res) => {
+  res.send("API is running 🚀");
+});
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
