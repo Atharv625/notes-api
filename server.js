@@ -8,24 +8,20 @@ connectDB();
 
 const app = express();
 
-// ✅ MUST be before routes
-app.use(cors({
-  origin: "http://localhost:5173",
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true
-}));
-
-// ✅ handle preflight
-app.options("*", cors());
+// ✅ SIMPLE CORS (works 100%)
+app.use(cors());
 
 app.use(express.json());
 
 // routes
 app.use("/api/notes", require("./routes/noteRoutes"));
 app.use("/api/auth", require("./routes/authRoutes"));
+
+// root route
 app.get("/", (req, res) => {
   res.send("API is running 🚀");
 });
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
